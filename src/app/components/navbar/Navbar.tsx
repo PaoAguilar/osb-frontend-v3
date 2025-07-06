@@ -7,18 +7,18 @@ const Navbar = () => {
     <header className="flex items-center justify-between p-4 bg-transparent">
       <SiteLogo size="medium" imageSrc="/img/logo_horizontal.svg" />
       <nav className="flex items-center space-x-6 text-white">
-        <Button variant="outline">Control Panel</Button>
-        <Button>Store</Button>
-        <Button>Inventory</Button>
-        <Button>Playing</Button>
+        <Button variant="link">Control Panel</Button>
+        <Button variant="link">Store</Button>
+        <Button variant="link">Inventory</Button>
+        <Button variant="link">Playing</Button>
       </nav>
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center space-x-3 rounded-full cursor-pointer hover:border-1 hover:border-primary-orange px-2.5 py-1.5">
         <img
-          src="/img/avatar-placeholder.jpg"
+          src="/img/user-example.jpg"
           alt="Avatar del usuario"
-          className="w-10 h-10 rounded-full object-cover border-2 border-gray-200"
+          className="w-10 h-10 rounded-full object-cover"
         />
-        <span className="text-gray-700 font-medium">Usuario</span>
+        <span className="text-white font-medium">Usuario</span>
       </div>
     </header>
   );

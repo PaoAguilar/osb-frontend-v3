@@ -34,6 +34,8 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
   --color-primary-orange: var(--primary-orange);
+  --color-orange-24: var(--orange-24);
+  --color-secondary-cyan: var(--secondary-cyan);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -49,8 +51,6 @@
   --font-geist: 'Geist', sans-serif;
   --font-geist-mono: 'Geist Mono', monospace;
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -58,6 +58,7 @@
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
+  --secondary-cyan: #2DFFFE;
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
@@ -80,8 +81,11 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --primary-orange: #FF6B2F
-}
+  --primary-orange: #FF6B2F;
+  --orange-24: #FF6B2F3D;
+;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0)}
 
 .dark {
   --background: oklch(0.145 0 0);

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/navbar/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 
 const apexMk2 = localFont({
   src: [

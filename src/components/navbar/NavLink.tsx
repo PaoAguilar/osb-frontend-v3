@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React from "react";
-import Button from "../commons/button/Button";
+import Button from "../button/Button";
 
 interface NavLinkProps {
   label: string;

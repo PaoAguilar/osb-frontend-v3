@@ -9,8 +9,18 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import WeaponPreview from "./WeaponPreview";
+import { useState } from "react";
 
 const Weapons = () => {
+  const [open, setOpen] = useState(false);
+  const [selectedWeapon, setSelectedWeapon] = useState<any>(null);
+
+  const handleOpenDialog = (weapon: any) => {
+    setSelectedWeapon(weapon);
+    setOpen(true);
+  };
+
   const weapons = [
     { name: "BLUE ORB", description: "50% extra power", price: "$45", src: "/img/gun.svg" },
     { name: "BLUE SHIELD", description: "40% damage resistance", price: "$45", src: "/img/gun.svg" },
@@ -31,6 +41,7 @@ const Weapons = () => {
             <Card
               key={index}
               className="group bg-orange-24 hover:shadow-lg transition-shadow text-white font-bold border-2 border-transparent hover:bg-transparent hover:border-secondary transition-colors duration-300 cursor-pointer"
+              onClick={() => handleOpenDialog(weapon)}
             >
               <CardHeader>
                 <div className="bg-card-bg rounded-lg flex justify-center py-5">
@@ -65,6 +76,13 @@ const Weapons = () => {
           ))}
         </div>
       </div>
+      {selectedWeapon && (
+        <WeaponPreview
+          open={open}
+          onOpenChange={setOpen}
+          weapon={selectedWeapon}
+        />
+      )}
     </div>
   );
 };

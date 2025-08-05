@@ -30,9 +30,9 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
+  --color-secondary: var(--secondary-cyan);
   --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
+  --color-primary: var(--primary-orange);
   --color-primary-orange: var(--primary-orange);
   --color-orange-24: var(--orange-24);
   --color-secondary-cyan: var(--secondary-cyan);
@@ -65,7 +65,7 @@
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: #e7000b;
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
@@ -151,6 +151,21 @@
   z-index: -1;
   pointer-events: none;
 }
+
+.custom-scroll-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scroll-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+}
+
+.custom-scroll-thin {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
 
 @layer base {
   * {

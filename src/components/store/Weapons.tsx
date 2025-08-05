@@ -30,7 +30,7 @@ const Weapons = () => {
           {weapons.map((weapon, index) => (
             <Card
               key={index}
-              className="bg-orange-24 hover:shadow-lg transition-shadow text-white font-bold border-2 border-transparent hover:bg-transparent hover:border-secondary transition-colors duration-300 cursor-pointer"
+              className="group bg-orange-24 hover:shadow-lg transition-shadow text-white font-bold border-2 border-transparent hover:bg-transparent hover:border-secondary transition-colors duration-300 cursor-pointer"
             >
               <CardHeader>
                 <div className="bg-card-bg rounded-lg flex justify-center py-5">
@@ -49,8 +49,15 @@ const Weapons = () => {
               </CardHeader>
 
               <CardFooter className="gap-8 justify-between">
-                <p className="text-2xl font-bold ">{weapon.price}</p>
-                <Button className="bg-black hover:bg-secondary hover:text-black">
+                <p className="text-2xl font-bold">{weapon.price}</p>
+                <Button
+                  className="
+                    bg-black text-white rounded-full w-fit
+                    hover:bg-secondary hover:text-black
+                    group-hover:bg-cyan-400 group-hover:text-black
+                    transition-colors duration-300
+                  "
+                >
                   ADD TO CARD
                 </Button>
               </CardFooter>

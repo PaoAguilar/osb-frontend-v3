@@ -35,6 +35,7 @@
   --color-primary: var(--primary-orange);
   --color-primary-orange: var(--primary-orange);
   --color-orange-24: var(--orange-24);
+  --color-orange-32: var(--orange-32);
   --color-secondary-cyan: var(--secondary-cyan);
   --color-card-bg: var(--card-bg);
   --color-popover-foreground: var(--popover-foreground);
@@ -84,8 +85,8 @@
   --sidebar-ring: oklch(0.708 0 0);
   --primary-orange: #FF6B2F;
   --orange-24: #FF6B2F3D;
+  --orange-32: #A67864;
   --card-bg: #EDEFEF;
-;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0)}
 
@@ -180,6 +181,6 @@
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    padding: 0 5.625rem;
+    /* padding: 0 5.625rem; */
   }
 }

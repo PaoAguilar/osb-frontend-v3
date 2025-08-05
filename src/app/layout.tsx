@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
+import Footer from "@/components/footer/Footer";
 
 const apexMk2 = localFont({
   src: [
@@ -42,9 +43,12 @@ export default function RootLayout({
       <body
         className={`${apexMk2.variable} ${geist.variable} ${geistMono.variable} font-apex relative min-h-screen`}
       >
-        <div className="overlay" />
-        <Navbar />
-        {children}
+        <div className="px-[5.625rem]">
+          <div className="overlay" />
+          <Navbar />
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );

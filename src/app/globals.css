@@ -34,6 +34,7 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary-orange);
   --color-primary-orange: var(--primary-orange);
+  --color-orange-dark: var(--orange-dark);
   --color-orange-24: var(--orange-24);
   --color-orange-32: var(--orange-32);
   --color-secondary-cyan: var(--secondary-cyan);
@@ -84,6 +85,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --primary-orange: #FF6B2F;
+  --orange-dark: #732100;
   --orange-24: #FF6B2F3D;
   --orange-32: #A67864;
   --card-bg: #EDEFEF;

@@ -28,7 +28,6 @@ export default function WeaponPreview({
                    bg-gradient-to-b from-[#531700] to-black 
                    text-white p-0"
       >
-        {/* Fondo de pantalla */}
         <div className="absolute inset-0 z-0 opacity-20">
           <Image
             src="/img/single-view-bg.png"
@@ -37,7 +36,6 @@ export default function WeaponPreview({
             className="object-cover"
           />
         </div>
-        {/* Contenido */}
         <div className="p-6 space-y-6">
           <div className="flex justify-center">
             <Image

@@ -8,7 +8,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import Image from "next/image";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import WeaponPreview from "./WeaponPreview";
 import { useState } from "react";
 

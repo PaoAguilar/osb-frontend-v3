@@ -8,10 +8,9 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
+  SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { SelectTrigger } from "@radix-ui/react-select";
 import { Search } from "lucide-react";
 import React from "react";
 
@@ -24,11 +23,11 @@ const Store = () => {
         imageUrl="/img/banner.png"
         overlayClassName="bg-transparent"
       />
-      <p className="text-white text-sm normal-case mt-10">Weapons</p>
+      <p className="text-white text-sm normal-case mt-10">Select Your Loadouts</p>
       <div className="mt-4 flex justify-between">
         <Select>
-          <SelectTrigger className="w-[300px] text-white bg-orange-dark h-8 rounded-[8px] cursor-pointer">
-            <SelectValue className="text-white" placeholder="Select a fruit" />
+          <SelectTrigger className="w-[300px] text-white bg-orange-dark cursor-pointer">
+            <SelectValue className="text-white" placeholder="Weapons" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>

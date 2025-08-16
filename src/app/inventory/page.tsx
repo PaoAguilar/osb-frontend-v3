@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import {
@@ -25,12 +25,17 @@ const weapons = [
 ];
 
 const Inventory = () => {
-  const [selectedInventory, setSelectedInventory] = useState(null);
+  const [selectedInventory, setSelectedInventory] = useState<any>(null);
 
   const handleInventoryDetail = (inventory: any) => {
-    setSelectedInventory(
-      selectedInventory?.id === inventory.id ? null : inventory
-    );
+    const newSelection =
+      selectedInventory?.id === inventory.id ? null : inventory;
+
+    setSelectedInventory(newSelection);
+
+    if (newSelection) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const handleCloseInventoryDetail = () => {
@@ -62,23 +67,21 @@ const Inventory = () => {
       </div>
 
       {selectedInventory && (
-        <InventoryDetail 
-          weapon={selectedInventory} 
+        <InventoryDetail
+          inventory={selectedInventory}
           onClose={handleCloseInventoryDetail}
         />
       )}
 
       <div className="mt-20 mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {weapons.map((weapon, index) => {
-          return (
-            <InventoryCard
-              key={index}
-              inventory={weapon}
-              onClick={handleInventoryDetail}
-              isSelected={selectedInventory?.id === weapon.id}
-            />
-          );
-        })}
+        {weapons.map((weapon, index) => (
+          <InventoryCard
+            key={index}
+            inventory={weapon}
+            onClick={handleInventoryDetail}
+            isSelected={selectedInventory?.id === weapon.id}
+          />
+        ))}
       </div>
     </div>
   );

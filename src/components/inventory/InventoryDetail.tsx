@@ -45,7 +45,7 @@ const InventoryDetail = ({
           {/* Right Column - Stats and Details */}
           <div>
             <div className="flex justify-between items-center">
-              <h2 className="text-secondary text-5xl">Read Square</h2>
+              <h2 className="text-secondary text-5xl">{inventory?.name}</h2>
               <Button
                 onClick={onClose}
                 variant="ghost"
@@ -55,9 +55,6 @@ const InventoryDetail = ({
               </Button>
             </div>
             <div>
-              <h3 className="text-4xl font-bold text-cyan-400 mb-1">
-                {inventory?.name}
-              </h3>
               <p className="text-white text-2xl font-medium tracking-wide">
                 WEAPON LEVEL
               </p>

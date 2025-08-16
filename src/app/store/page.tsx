@@ -21,6 +21,7 @@ const Store = () => {
         title="Blue Orb"
         description="Lorem ipsum dolor sit amet consectetur. Diam risus odio non magna volutpat gravida malesuada. Sem in a faucibus cursus. Quis eget quam id nunc convallis gravida interdum diam amet."
         imageUrl="/img/banner.png"
+        contentImageUrl="/img/gun.svg"
         overlayClassName="bg-transparent"
       />
       <p className="text-white text-sm normal-case mt-10">Select Your Loadouts</p>

@@ -2,13 +2,9 @@ import React from "react";
 import {
   Card,
   CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
   CardContent,
 } from "@/components/ui/card";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 
 interface Inventory {
   name: string;
@@ -28,7 +24,12 @@ const InventoryCard = ({
 }: InventoryCardProps) => {
   return (
     <Card
-      className="group bg-orange-24 pt-2 hover:shadow-lg text-white font-bold border-2 border-transparent hover:bg-transparent hover:border-secondary transition-colors duration-300 cursor-pointer"
+      className={`group pt-2 text-white font-bold border-2 transition-colors duration-300 cursor-pointer
+        ${
+          isSelected
+            ? "shadow-lg bg-transparent border-secondary"
+            : "bg-orange-24 border-transparent hover:shadow-lg hover:bg-transparent hover:border-secondary"
+        }`}
       onClick={() => onClick(inventory)}
     >
       <CardHeader className="px-2">

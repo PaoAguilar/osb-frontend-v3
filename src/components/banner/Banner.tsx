@@ -3,6 +3,31 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
+type TaglineProps = {
+  primary?: string;
+  secondary?: string;
+  className?: string;
+};
+
+function TaglineMark({
+  primary = "BEST",
+  secondary = "WEAPON",
+  className = "",
+}: TaglineProps) {
+  return (
+    <div className={`flex items-start gap-3 sm:gap-4 ${className}`}>
+      <div className="leading-none border-l-2 border-primary pl-5">
+        <div className="uppercase tracking-[0.35em] text-white text-lg sm:text-[20px] md:text-[22px] font-light">
+          {primary}
+        </div>
+        <div className="uppercase tracking-[0.35em] text-orange-32 text-xs sm:text-[18px] md:text-[20px] font-light">
+          {secondary}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 interface WeaponBannerProps {
   title: string;
   subtitle?: string;
@@ -13,6 +38,10 @@ interface WeaponBannerProps {
   buttonText?: string;
   onButtonClick?: () => void;
   overlayClassName?: string;
+
+  showTagline?: boolean;
+  taglinePrimary?: string;
+  taglineSecondary?: string;
 }
 
 export default function WeaponBanner({
@@ -25,6 +54,9 @@ export default function WeaponBanner({
   buttonText = "Add to Card",
   onButtonClick,
   overlayClassName = "bg-black/50",
+  showTagline = true,
+  taglinePrimary = "BEST",
+  taglineSecondary = "WEAPON",
 }: WeaponBannerProps) {
   return (
     <section className="relative w-full rounded-2xl overflow-hidden">
@@ -42,7 +74,14 @@ export default function WeaponBanner({
 
       <div className="relative z-10 p-6 sm:p-8 md:p-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-stretch">
-          <div className="flex flex-col justify-center gap-4 max-w-2xl">
+          <div className="flex flex-col justify-center gap-5 max-w-2xl">
+            {showTagline && (
+              <TaglineMark
+                primary={taglinePrimary}
+                secondary={taglineSecondary}
+              />
+            )}
+
             {subtitle && (
               <p className="text-orange-500 tracking-widest uppercase text-xs sm:text-sm">
                 {subtitle}

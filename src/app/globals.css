@@ -199,3 +199,8 @@
 .layout--hangar {
   background-image: url("/img/hangar.png");
 }
+
+.layout--hangar .overlay {
+  display: none !important;
+}
+

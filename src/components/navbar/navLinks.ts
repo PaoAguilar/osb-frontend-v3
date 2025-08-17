@@ -1,5 +1,5 @@
 export const navLinks = [
-  { label: "Control Panel" },
+  { label: "Menu", href:"/" },
   { label: "Store", href: "/store" },
   { label: "Inventory", href: "/inventory" },
   { label: "Hangar", href: "/hangar" },

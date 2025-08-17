@@ -21,10 +21,9 @@ export default function ProfileStats({ stats }: { stats: StatItem[] }) {
   return (
     <section className="relative text-white pb-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-cyan-300 uppercase tracking-[0.2em] font-bold">
+        <h3 className="text-secondary text-xl uppercase tracking-[0.2em] font-bold">
           Your Earning
         </h3>
-
         <Button
           type="button"
           className="
@@ -38,16 +37,16 @@ export default function ProfileStats({ stats }: { stats: StatItem[] }) {
         </Button>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="mt-4 flex justify-between items-center">
         {stats.map((s) => (
           <div key={s.id} className="flex items-center gap-4">
             <div className="shrink-0">{ICONS[s.id]}</div>
 
-            <div className="leading-tight">
-              <div className="text-[11px] uppercase tracking-[0.2em] text-white/70">
+            <div className="flex flex-col items-start justify-between">
+              <div className="text-xs uppercase tracking-[0.2em] text-white/70">
                 {s.label}
               </div>
-              <div className="text-3xl font-semibold">{s.value}</div>
+              <div className="text-2xl font-semibold mt-2">{s.value}</div>
             </div>
           </div>
         ))}

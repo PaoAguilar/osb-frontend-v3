@@ -184,6 +184,10 @@
   color: var(--green-32);
 }
 
+.bg-orange-32 {
+  background-color: var(--orange-32);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

@@ -4,7 +4,6 @@ import { HoverImage } from "@/components/commons/HoverImage"; // <-- tu componen
 
 export default function Home() {
   return (
-    <main className="flex items-center justify-center p-4">
       <div className="relative mx-auto w-full max-w-[1200px] aspect-[1084/763] overflow-hidden rounded-2xl border-0 shadow">
         {/* Profile */}
         <HoverImage
@@ -54,6 +53,5 @@ export default function Home() {
           style={{ right: "48%", bottom: "30%" }}
         />
       </div>
-    </main>
   );
 }

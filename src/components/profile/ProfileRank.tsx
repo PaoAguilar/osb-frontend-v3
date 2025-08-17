@@ -125,7 +125,7 @@ export default function ProfileRank({
   }, [data, q, team, pos, score]);
 
   return (
-    <Card className="rounded-[18px] border border-primary bg-primary/35 p-4 text-white">
+    <Card className="rounded-lg border border-primary bg-primary/35 p-4 text-white">
 
       <div className="flex items-center justify-between gap-3">
         <h3 className="text-secondary text-xl uppercase tracking-[0.25em] font-extrabold">
@@ -200,7 +200,7 @@ export default function ProfileRank({
         
       </div>
 
-      <div className="mt-5 px-1 text-[11px] uppercase tracking-[0.25em] text-white/70">
+      <div className="mt-4 px-1 text-sm uppercase tracking-[0.25em] text-white font-semibold">
         <div className="grid grid-cols-[64px_1fr_repeat(3,160px)]">
           <div>#</div>
           <div>Team</div>

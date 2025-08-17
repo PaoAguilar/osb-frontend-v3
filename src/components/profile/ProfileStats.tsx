@@ -19,7 +19,7 @@ const ICONS: Record<StatItem["id"], React.ReactNode> = {
 
 export default function ProfileStats({ stats }: { stats: StatItem[] }) {
   return (
-    <section className="relative text-white pb-4">
+    <section className="relative text-white ">
       <div className="flex items-center justify-between">
         <h3 className="text-secondary text-xl uppercase tracking-[0.2em] font-bold">
           Your Earning

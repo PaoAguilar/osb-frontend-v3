@@ -5,7 +5,7 @@ import ProfileSidebar, {
   ProfileSidebarProps,
 } from "@/components/profile/ProfileSidebar";
 import ProfileStats, { StatItem } from "@/components/profile/ProfileStats";
-import ProfileRank, { RankRow, Option } from "@/components/profile/ProfileRank";
+import ProfileRank, { Option } from "@/components/profile/ProfileRank";
 
 const ProfilePage = () => {
 

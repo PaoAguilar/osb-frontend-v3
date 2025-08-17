@@ -168,7 +168,7 @@
 }
 
 .custom-scroll-thin {
-  scrollbar-width: thin; /* Firefox */
+  scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
 }
 
@@ -180,11 +180,22 @@
     @apply bg-background text-foreground;
     overflow: auto;
     height: auto;
-    background-image: url("/img/planets.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    /* padding: 0 5.625rem; */
   }
+}
+
+.layout {
+  min-height: 100svh;
+  background: no-repeat center / cover;
+  position: relative;
+  isolation: isolate;    
+}
+
+/* Background by default */
+.layout--default {
+  background-image: url("/img/planets.jpg");
+}
+
+/* Background for hangar */
+.layout--hangar {
+  background-image: url("/img/hangar.png");
 }

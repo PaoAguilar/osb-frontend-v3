@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 type HoverImageProps = {
@@ -9,6 +10,7 @@ type HoverImageProps = {
   alt: string;
   width: number;
   height: number;
+  href: string;
   className?: string;
   style?: React.CSSProperties;
 };
@@ -19,15 +21,17 @@ export function HoverImage({
   alt,
   width,
   height,
+  href,
   className,
   style,
 }: HoverImageProps) {
   const [hover, setHover] = useState(false);
 
   return (
-    <div
-      className={className}
-      style={{ ...style, width, height, position: "absolute" }}
+    <Link
+      href={href}
+      className={`${className} absolute block cursor-pointer`}
+      style={{ ...style, width, height }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -37,6 +41,6 @@ export function HoverImage({
         fill
         className="object-contain select-none"
       />
-    </div>
+    </Link>
   );
 }

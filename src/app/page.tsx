@@ -14,6 +14,7 @@ export default function Home() {
           width={450}
           height={500}
           className="absolute z-30"
+          href="/profile"
           style={{ left: "5%", bottom: "1%" }}
         />
 
@@ -25,6 +26,7 @@ export default function Home() {
           width={380}
           height={320}
           className="absolute z-20"
+          href="/hangar"
           style={{ right: "19%", bottom: "24%" }}
         />
 
@@ -36,6 +38,7 @@ export default function Home() {
           width={220}
           height={160}
           className="absolute z-20"
+          href="/inventory"
           style={{ right: "40%", bottom: "14%" }}
         />
 
@@ -47,6 +50,7 @@ export default function Home() {
           width={190}
           height={130}
           className="absolute z-20"
+          href="/store"
           style={{ right: "48%", bottom: "30%" }}
         />
       </div>

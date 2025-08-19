@@ -16,7 +16,7 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
-  title: "Outer Sports Baller V3",
+  title: "Outer Sports Ballers",
   description: "Created by Zingiber Labs",
   openGraph: {
     images: ["/img/logo_horizontal.svg"],

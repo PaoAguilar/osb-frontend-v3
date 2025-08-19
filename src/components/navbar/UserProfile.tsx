@@ -1,11 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface UserProfileProps {
   name: string;
   avatar?: string;
   className?: string;
-  onClick?: () => void;
+  href: string;
 }
 
 const UserProfile = (props: UserProfileProps) => {
@@ -13,20 +14,19 @@ const UserProfile = (props: UserProfileProps) => {
     name,
     avatar = "/img/user-example.jpg",
     className = "",
-    onClick,
+    href,
   } = props;
+
   return (
-    <div
-      className={`flex items-center space-x-3 group cursor-pointer hover:bg-white/10 transition-colors rounded-full px-3 py-1.5 ${className}`}
-      onClick={onClick}
-      role="button"
-      tabIndex={0}
-      aria-label="user-profile"
+    <Link
+      href={href}
+      className={`flex items-center space-x-3 group cursor-pointer hover:bg-white/10 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/50 transition-colors rounded-full px-3 py-1.5 ${className}`}
+      aria-label={`User profile for ${name}`}
     >
       <div className="relative w-10 h-10 rounded-full overflow-hidden">
         <Image
           src={avatar}
-          alt={`Avatar de ${name}`}
+          alt={`Avatar of ${name}`}
           layout="fill"
           objectFit="cover"
         />
@@ -34,7 +34,7 @@ const UserProfile = (props: UserProfileProps) => {
       <span className="text-white font-medium hidden sm:inline-block">
         {name}
       </span>
-    </div>
+    </Link>
   );
 };
 

@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { AuthProvider } from "@/contexts/AuthContext";
+import "../globals.css";
 
 const apexMk2 = localFont({
   src: [
     {
-      path: "../../public/fonts/ApexMk2-Regular.woff",
+      path: "../../../public/fonts/ApexMk2-Regular.woff",
       weight: "300",
       style: "normal",
     },
@@ -23,14 +22,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Outer Sports Ballers - Alfa",
-  description: "Created by Zingiber Labs",
-  openGraph: {
-    images: ["/img/logo_horizontal.svg"],
-  },
+  title: "Login - Outer Sports Ballers",
+  description: "Login to Outer Sports Ballers",
 };
 
-export default function RootLayout({
+export default function LoginLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -40,7 +36,7 @@ export default function RootLayout({
       <body
         className={`${apexMk2.variable} ${geist.variable} ${geistMono.variable} font-apex relative`}
       >
-        <AuthProvider>{children}</AuthProvider>
+        {children}
       </body>
     </html>
   );

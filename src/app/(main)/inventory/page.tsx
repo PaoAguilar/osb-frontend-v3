@@ -11,21 +11,11 @@ import {
 } from "@/components/ui/select";
 import InventoryCard from "@/components/inventory/InventoryCard";
 import InventoryDetail from "@/components/inventory/InventoryDetail";
-
-const weapons = [
-  { name: "BLUE ORB", src: "/img/gun.svg", level: "5", id: 1 },
-  { name: "BLUE SHIELD", src: "/img/gun.svg", level: "5", id: 2 },
-  { name: "RED SWORD", src: "/img/gun.svg", level: "5", id: 3 },
-  { name: "GREEN BOW", src: "/img/gun.svg", level: "5", id: 4 },
-  { name: "BLACK AXE", src: "/img/gun.svg", level: "5", id: 5 },
-  { name: "GOLDEN STAFF", src: "/img/gun.svg", level: "5", id: 6 },
-  { name: "GREEN BOW", src: "/img/gun.svg", level: "5", id: 7 },
-  { name: "BLACK AXE", src: "/img/gun.svg", level: "5", id: 8 },
-  { name: "GOLDEN STAFF", src: "/img/gun.svg", level: "5", id: 9, locked: true },
-];
+import { useMyInventory } from "@/hooks/inventory/useMyInventory";
 
 const Inventory = () => {
   const [selectedInventory, setSelectedInventory] = useState<any>(null);
+  const { data, isLoading, error } = useMyInventory();
 
   const handleInventoryDetail = (inventory: any) => {
     const newSelection =
@@ -41,6 +31,65 @@ const Inventory = () => {
   const handleCloseInventoryDetail = () => {
     setSelectedInventory(null);
   };
+
+  // Loading state
+  if (isLoading) {
+    return (
+      <div>
+        <p className="text-secondary text-5xl font-bold mt-14 mb-6">
+          My inventory
+        </p>
+        <div className="mt-20 mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <div
+              key={index}
+              className="bg-orange-24 rounded-lg p-4 animate-pulse"
+            >
+              <div className="bg-gray-600 rounded-lg h-20 mb-4"></div>
+              <div className="h-6 bg-gray-600 rounded mb-2"></div>
+              <div className="h-4 bg-gray-600 rounded w-1/2"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div>
+        <p className="text-secondary text-5xl font-bold mt-14 mb-6">
+          My inventory
+        </p>
+        <div className="mt-20 mb-8 text-center">
+          <div className="text-red-500 text-xl font-bold mb-2">
+            Failed to load inventory
+          </div>
+          <p className="text-gray-400">
+            {error instanceof Error ? error.message : "An error occurred"}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // No data state
+  if (!data?.items || data.items.length === 0) {
+    return (
+      <div>
+        <p className="text-secondary text-5xl font-bold mt-14 mb-6">
+          My inventory
+        </p>
+        <div className="mt-20 mb-8 text-center">
+          <div className="text-gray-500 text-xl font-bold mb-2">
+            No items in inventory
+          </div>
+          <p className="text-gray-400">Visit the store to purchase items</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -74,12 +123,18 @@ const Inventory = () => {
       )}
 
       <div className="mt-20 mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {weapons.map((weapon, index) => (
+        {data.items.map((item) => (
           <InventoryCard
-            key={index}
-            inventory={weapon}
+            key={item.id}
+            inventory={{
+              id: item.id,
+              name: item.name,
+              src: item.image || "/img/gun.svg",
+              level: item.level?.toString() || "1",
+              locked: false, // You can add logic here based on item properties
+            }}
             onClick={handleInventoryDetail}
-            isSelected={selectedInventory?.id === weapon.id}
+            isSelected={selectedInventory?.id === item.id}
           />
         ))}
       </div>

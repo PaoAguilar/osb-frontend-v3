@@ -7,11 +7,7 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
-import {
-  hasValidSessionCookie,
-  clearSessionCookie,
-  debugCookies,
-} from "@/lib/auth";
+import { hasValidSessionCookie, clearSessionCookie } from "@/lib/auth";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -46,9 +42,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const checkAuthStatus = async () => {
     try {
-      // Debug cookies to see what's available
-      debugCookies();
-
       // First check if we have a session cookie
       if (!hasValidSessionCookie()) {
         setIsAuthenticated(false);

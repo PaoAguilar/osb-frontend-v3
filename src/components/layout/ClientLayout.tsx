@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import React from "react";
+import QueryProvider from "@/components/providers/QueryProvider";
 
 type Props = {
   children: React.ReactNode;
@@ -10,7 +11,7 @@ type Props = {
 
 export default function ClientLayout({ children, className = "" }: Props) {
   const pathname = usePathname();
-  
+
   let layoutClass = "layout";
 
   switch (true) {
@@ -24,5 +25,9 @@ export default function ClientLayout({ children, className = "" }: Props) {
       layoutClass += " layout--default";
   }
 
-  return <div className={`${layoutClass} ${className}`}>{children}</div>;
+  return (
+    <QueryProvider>
+      <div className={`${layoutClass} ${className}`}>{children}</div>
+    </QueryProvider>
+  );
 }

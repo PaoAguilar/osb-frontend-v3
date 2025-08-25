@@ -1,32 +1,36 @@
 // Utility functions for authentication
 
 export const getSessionCookieName = (): string => {
-  // You can adjust this based on your backend cookie name
-  // Common names: 'session', 'sessionId', 'auth', 'token'
-  return "session";
-};
-
-export const debugCookies = (): void => {
-  console.log("All cookies:", document.cookie);
-  const cookies = document.cookie.split(";");
-  cookies.forEach((cookie) => {
-    console.log("Cookie:", cookie.trim());
-  });
+  // The backend uses 'session_token' as the cookie name
+  return "session_token";
 };
 
 export const hasValidSessionCookie = (): boolean => {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
   const cookieName = getSessionCookieName();
   return document.cookie.includes(cookieName);
 };
 
 export const clearSessionCookie = (): void => {
+  if (typeof window === "undefined") {
+    return;
+  }
+
   const cookieName = getSessionCookieName();
   document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 };
 
 export const getSessionCookie = (): string | null => {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
   const cookieName = getSessionCookieName();
   const cookies = document.cookie.split(";");
+
   const sessionCookie = cookies.find((cookie) =>
     cookie.trim().startsWith(`${cookieName}=`)
   );

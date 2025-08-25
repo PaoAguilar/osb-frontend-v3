@@ -11,56 +11,106 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import WeaponPreview from "./WeaponPreview";
 import { useState } from "react";
+import { StoreItem, useStoreItems } from "@/hooks/store-page/useStoreItems";
 
 const Weapons = () => {
   const [open, setOpen] = useState(false);
   const [selectedWeapon, setSelectedWeapon] = useState<any>(null);
 
-  const handleOpenDialog = (weapon: any) => {
+  // Use the hook to fetch store items
+  const { data, isLoading, error } = useStoreItems();
+
+  const handleOpenDialog = (weapon: StoreItem) => {
     setSelectedWeapon(weapon);
     setOpen(true);
   };
 
-  const weapons = [
-    { name: "BLUE ORB", description: "50% extra power", price: "$45", src: "/img/gun.svg" },
-    { name: "BLUE SHIELD", description: "40% damage resistance", price: "$45", src: "/img/gun.svg" },
-    { name: "RED SWORD", description: "60% critical hit chance", price: "$75", src: "/img/gun.svg" },
-    { name: "GREEN BOW", description: "30% increased accuracy", price: "$55", src: "/img/gun.svg" },
-    { name: "BLACK AXE", description: "70% armor penetration", price: "$85", src: "/img/gun.svg" },
-    { name: "GOLDEN STAFF", description: "100% magic boost", price: "$120", src: "/img/gun.svg" },
-    { name: "GREEN BOW", description: "30% increased accuracy", price: "$55", src: "/img/gun.svg" },
-    { name: "BLACK AXE", description: "70% armor penetration", price: "$85", src: "/img/gun.svg" },
-    { name: "GOLDEN STAFF", description: "100% magic boost", price: "$120", src: "/img/gun.svg" },
-  ];
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="h-screen flex flex-col mt-6 mb-6">
+        <div className="flex-1 overflow-y-auto custom-scroll-thin pr-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <Card
+                key={index}
+                className="bg-orange-24 text-white font-bold border-2 border-transparent animate-pulse"
+              >
+                <CardHeader>
+                  <div className="bg-card-bg rounded-lg flex justify-center py-5 h-20"></div>
+                  <div className="h-8 bg-gray-600 rounded"></div>
+                  <div className="h-6 bg-gray-600 rounded w-3/4"></div>
+                </CardHeader>
+                <CardFooter className="gap-8 justify-between">
+                  <div className="h-8 bg-gray-600 rounded w-16"></div>
+                  <div className="h-10 bg-gray-600 rounded w-24"></div>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="h-screen flex flex-col mt-6 mb-6">
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center text-white">
+            <h3 className="text-xl font-bold mb-2">Failed to load weapons</h3>
+            <p className="text-gray-400">
+              {error instanceof Error ? error.message : "An error occurred"}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // No data state
+  if (!data?.items || data.items.length === 0) {
+    return (
+      <div className="h-screen flex flex-col mt-6 mb-6">
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center text-white">
+            <h3 className="text-xl font-bold mb-2">No weapons available</h3>
+            <p className="text-gray-400">Check back later for new items</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-screen flex flex-col mt-6 mb-6">
       <div className="flex-1 overflow-y-auto custom-scroll-thin pr-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
-          {weapons.map((weapon, index) => (
+          {data.items.map((item) => (
             <Card
-              key={index}
+              key={item.id}
               className="group bg-orange-24 hover:shadow-lg transition-shadow text-white font-bold border-2 border-transparent hover:bg-transparent hover:border-secondary transition-colors duration-300 cursor-pointer"
-              onClick={() => handleOpenDialog(weapon)}
+              onClick={() => handleOpenDialog(item)}
             >
               <CardHeader>
                 <div className="bg-card-bg rounded-lg flex justify-center py-5">
                   <Image
-                    src={weapon.src || ""}
-                    alt={weapon.name}
+                    src={item.image || "/img/gun.svg"}
+                    alt={item.name}
                     width={108}
                     height={60}
                     className="object-contain"
                   />
                 </div>
-                <CardTitle className="text-2xl">{weapon.name}</CardTitle>
+                <CardTitle className="text-2xl">{item.name}</CardTitle>
                 <CardDescription className="text-lg text-white font-light">
-                  {weapon.description}
+                  {item.description}
                 </CardDescription>
               </CardHeader>
 
               <CardFooter className="gap-8 justify-between">
-                <p className="text-2xl font-bold">{weapon.price}</p>
+                <p className="text-2xl font-bold">${item.price}</p>
                 <Button
                   className="
                     bg-black text-white rounded-full w-fit

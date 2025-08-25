@@ -9,12 +9,14 @@ export default function MainLayout({
 }) {
   return (
     <ClientLayout>
-      <div className="px-[5.625rem]">
-        <div className="overlay" />
-        <Navbar />
-        {children}
+      <div className="flex flex-col min-h-screen">
+        <div className="px-[5.625rem] flex-1">
+          <div className="overlay" />
+          <Navbar />
+          {children}
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </ClientLayout>
   );
 }

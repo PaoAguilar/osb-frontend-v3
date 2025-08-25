@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Lock } from "lucide-react";
 
 interface Inventory {
+  id: string;
   name: string;
   level?: string;
   src: string;

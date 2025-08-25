@@ -4,17 +4,17 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 
 export const AuthStatus = () => {
-  const { isAuthenticated, isGuest, isLoading, user, logout } = useAuth();
+  const { isAuthenticated, isGuest, isLoading, logout } = useAuth();
 
   if (isLoading) {
     return <div className="text-sm text-gray-500">Checking auth status...</div>;
   }
 
   if (!isAuthenticated) {
-    return <div className="text-sm text-red-500">Not authenticated</div>;
+    return (
+      <div className="text-sm text-yellow-500">Creating guest session...</div>
+    );
   }
-
-  console.log({ isGuest, isAuthenticated, isLoading, user });
 
   return (
     <div className="flex items-center gap-4">

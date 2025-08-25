@@ -9,7 +9,7 @@ export default function MainLayout({
 }) {
   return (
     <ClientLayout>
-      <div className="px-[5.625rem]">
+      <div className="px-4 sm:px-8 md:px-16 lg:px-[5.625rem]">
         <div className="overlay" />
         <Navbar />
         {children}

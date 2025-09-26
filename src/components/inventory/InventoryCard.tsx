@@ -10,6 +10,7 @@ interface Inventory {
   level?: string;
   src: string;
   locked?: boolean;
+  equipped?: boolean;
 }
 interface InventoryCardProps {
   inventory: Inventory;
@@ -22,19 +23,20 @@ const InventoryCard = ({
   onClick,
   isSelected,
 }: InventoryCardProps) => {
-  const { locked } = inventory;
+  // TODO: remove hardcoded equipped value
+  const { locked, equipped = true } = inventory;
 
   return (
     <Card
       className={`group pt-2 text-white font-bold border-2 transition-colors duration-300 relative
         ${
           isSelected
-            ? "shadow-lg bg-transparent border-secondary"
+            ? "shadow-lg bg-[#10101099] border-secondary"
             : "bg-orange-24 border-transparent hover:shadow-lg hover:bg-[#10101099] hover:border-secondary"
         }
         ${
           locked
-            ? "bg-grey-dark hover:bg-grey-dark cursor-not-allowed hover:border-transparent hover:shadow-none"
+            ? "bg-grey-dark hover:bg-grey-dark cursor-not-allowed hover:border-[#10101099] hover:shadow-none"
             : "cursor-pointer"
         }
       `}
@@ -49,6 +51,12 @@ const InventoryCard = ({
             height={60}
             className={`object-contain ${locked ? "opacity-40" : ""}`}
           />
+
+          {equipped && (
+            <div className="absolute top-2 right-2 bg-green-600 text-white text-xs font-semibold rounded-full px-3 py-1 tracking-wide shadow-md">
+              EQUIPPED
+            </div>
+          )}
 
           {locked && (
             <div className="absolute inset-0 flex items-center justify-center">

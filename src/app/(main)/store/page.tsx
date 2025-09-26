@@ -13,20 +13,66 @@ import {
 } from "@/components/ui/select";
 import { Search } from "lucide-react";
 import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper/modules";
 
 const Store = () => {
+  const banners = [
+    {
+      taglinePrimary: "BEST",
+      taglineSecondary: "WEAPON",
+      title: "Blue Orb",
+      description:
+        "Lorem ipsum dolor sit amet consectetur. Diam risus odio non magna volutpat gravida malesuada.",
+      imageUrl: "/img/banner.png",
+      contentImageUrl: "/img/gun.svg",
+    },
+    {
+      taglinePrimary: "NEW",
+      taglineSecondary: "SHIP",
+      title: "Falcon X",
+      description:
+        "Conquer the galaxy with speed and firepower. The Falcon X is unmatched in aerial battles.",
+      imageUrl: "/img/banner.png",
+      contentImageUrl: "/img/gun.svg",
+    },
+    {
+      taglinePrimary: "ULTIMATE",
+      taglineSecondary: "SKILL",
+      title: "Stealth Mode",
+      description:
+        "Disappear from your enemies’ radar and strike with precision when they least expect it.",
+      imageUrl: "/img/banner.png",
+      contentImageUrl: "/img/gun.svg",
+    },
+  ];
+
   return (
     <div className="pt-8 gap-8">
-      <Banner
-        showTagline
-        taglinePrimary="BEST"
-        taglineSecondary="WEAPON"
-        title="Blue Orb"
-        description="Lorem ipsum dolor sit amet consectetur. Diam risus odio non magna volutpat gravida malesuada. Sem in a faucibus cursus. Quis eget quam id nunc convallis gravida interdum diam amet."
-        imageUrl="/img/banner.png"
-        contentImageUrl="/img/gun.svg"
-        overlayClassName="bg-transparent"
-      />
+      <Swiper
+        modules={[Pagination, Autoplay]}
+        navigation
+        pagination={{ clickable: false }}
+        autoplay={{ delay: 4000 }}
+        loop
+        className="w-full h-[400px]"
+      >
+        {banners.map((banner, idx) => (
+          <SwiperSlide key={idx}>
+            <Banner
+              showTagline
+              taglinePrimary={banner.taglinePrimary}
+              taglineSecondary={banner.taglineSecondary}
+              title={banner.title}
+              description={banner.description}
+              imageUrl={banner.imageUrl}
+              contentImageUrl={banner.contentImageUrl}
+              overlayClassName="bg-transparent"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
       <p className="text-white text-sm normal-case mt-10">
         Select Your Loadouts
       </p>

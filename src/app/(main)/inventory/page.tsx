@@ -123,7 +123,7 @@ const Inventory = () => {
       )}
 
       <div className="mt-20 mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {data.items.map((item) => (
+        {data?.items.map((item) => (
           <InventoryCard
             key={item.id}
             inventory={{

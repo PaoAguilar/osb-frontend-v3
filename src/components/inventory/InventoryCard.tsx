@@ -51,7 +51,7 @@ const InventoryCard = ({
             height={60}
             className={`object-contain ${locked ? "opacity-40" : ""}`}
           />
-
+          
           {equipped && (
             <div className="absolute top-2 right-2 bg-green-600 text-white text-xs font-semibold rounded-full px-3 py-1 tracking-wide shadow-md">
               EQUIPPED

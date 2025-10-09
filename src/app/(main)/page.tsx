@@ -1,7 +1,7 @@
 "use client";
 
 import { HoverImage } from "@/components/commons/HoverImage";
-import { AuthStatus } from "@/components/auth/AuthStatus";
+import { AuthPanel } from "@/components/auth/AuthStatus";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import Link from "next/link";
@@ -12,8 +12,6 @@ export default function Home() {
 
   return (
     <div className="relative mx-auto w-full max-w-[1200px] overflow-hidden rounded-2xl border-0 shadow min-h-[calc(100dvh-104px-91.83px)]">
-      <AuthStatus />
-
       {isMobile ? (
         <div className="flex flex-col gap-4 py-16 px-4 max-w-md mx-auto w-full text-white">
           <Link href="/hangar" passHref>
@@ -27,7 +25,7 @@ export default function Home() {
                 width={50}
                 height={50}
               />
-               <p className="text-3xl">HANGAR</p>
+              <p className="text-3xl">HANGAR</p>
             </Button>
           </Link>
           <Link href="/inventory" passHref>
@@ -77,6 +75,7 @@ export default function Home() {
         </div>
       ) : (
         <>
+          <AuthPanel />
           <HoverImage
             src="/img/menu/avatar.svg"
             activeSrc="/img/menu/avatar-active.png"

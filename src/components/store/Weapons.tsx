@@ -11,7 +11,8 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import WeaponPreview from "./WeaponPreview";
 import { useState } from "react";
-import { StoreItem, useStoreItems } from "@/hooks/store-page/useStoreItems";
+import { useStoreItems } from "@/hooks/store-page/useStoreItems";
+import { StoreItem } from "@/types/store-items";
 
 const Weapons = () => {
   const [open, setOpen] = useState(false);
@@ -87,7 +88,7 @@ const Weapons = () => {
     <div className="h-screen flex flex-col mt-6 mb-6">
       <div className="flex-1 overflow-y-auto custom-scroll-thin pr-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
-          {data.items.map((item) => (
+          {data.items.map((item: StoreItem) => (
             <Card
               key={item.id}
               className="group bg-orange-24 hover:shadow-lg transition-shadow text-white font-bold border-2 border-transparent hover:bg-transparent hover:border-secondary transition-colors duration-300 cursor-pointer"
@@ -96,7 +97,7 @@ const Weapons = () => {
               <CardHeader>
                 <div className="bg-card-bg rounded-lg flex justify-center py-5">
                   <Image
-                    src={item.image || "/img/gun.svg"}
+                    src={"/img/gun.svg"}
                     alt={item.name}
                     width={108}
                     height={60}

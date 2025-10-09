@@ -12,6 +12,7 @@ import {
 import InventoryCard from "@/components/inventory/InventoryCard";
 import InventoryDetail from "@/components/inventory/InventoryDetail";
 import { useMyInventory } from "@/hooks/inventory/useMyInventory";
+import { MyInventory } from "@/types/inventory-items";
 
 const Inventory = () => {
   const [selectedInventory, setSelectedInventory] = useState<any>(null);
@@ -123,18 +124,18 @@ const Inventory = () => {
       )}
 
       <div className="mt-20 mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {data?.items.map((item) => (
+        {data?.items.map((inventory: MyInventory) => (
           <InventoryCard
-            key={item.id}
+            key={inventory.id}
             inventory={{
-              id: item.id,
-              name: item.name,
-              src: item.image || "/img/gun.svg",
-              level: item.level?.toString() || "1",
+              id: inventory.id,
+              name: inventory.item.name,
+              src:"/img/gun.svg",
+              level: inventory.item.upgradeAttributes?.currentLevel?.toString() || "1",
               locked: false, // You can add logic here based on item properties
             }}
             onClick={handleInventoryDetail}
-            isSelected={selectedInventory?.id === item.id}
+            isSelected={selectedInventory?.id === inventory.id}
           />
         ))}
       </div>

@@ -40,8 +40,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<any | null>(null);
 
+  const API = process.env.NEXT_PUBLIC_API_URL;
+
   const checkAuthStatus = async () => {
     try {
+      const token = localStorage.getItem("access_token");
+
+      if (token) {
+        setIsAuthenticated(true);
+        setIsGuest(false);
+        setIsLoading(false);
+        return;
+      }
+
       // First check if we have a session cookie
       if (!hasValidSessionCookie()) {
         setIsAuthenticated(false);
@@ -82,25 +93,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const loginAsGuest = async () => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/guest/create-anonymous-session`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        }
-      );
+      const response = await fetch(`${API}/guest/create-anonymous-session`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
 
-      if (response.ok) {
-        const data = await response.json();
-        setIsAuthenticated(true);
-        setIsGuest(true);
-        setUser({ type: "guest", ...data });
-      } else {
-        throw new Error("Failed to create guest session");
-      }
+      if (!response.ok) throw new Error("Failed to create guest session");
+
+      const data = await response.json();
+      setIsAuthenticated(true);
+      setIsGuest(true);
+      setUser({ type: "guest", ...data });
     } catch (error) {
       console.error("Error creating guest session:", error);
       throw error;
@@ -108,12 +112,43 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const login = async (email: string, password: string) => {
-    // Implement regular login logic here
-    // This would replace guest session with a real user session
-    console.log("Regular login not implemented yet", { email, password });
+    try {
+      const resp = await fetch(`${API}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!resp.ok) {
+        let message = "Invalid credentials";
+        try {
+          const errData = await resp.json();
+          message = errData?.message || message;
+        } catch {}
+        throw new Error(message);
+      }
+
+      const data = await resp.json();
+      if (data?.access_token) {
+        localStorage.setItem("access_token", data.access_token);
+      }
+
+      if (data?.user) {
+        setIsAuthenticated(true);
+        setIsGuest(false);
+        setUser({ type: "user", ...data.user });
+        return;
+      }
+
+      await checkAuthStatus();
+    } catch (error) {
+      throw error;
+    }
   };
 
   const logout = async () => {
+    localStorage.removeItem("access_token");
     // Clear session cookies and reset state
     try {
       clearSessionCookie();

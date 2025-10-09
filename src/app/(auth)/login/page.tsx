@@ -21,10 +21,12 @@ interface LoginFormData {
 
 const Login = () => {
   const router = useRouter();
-  const { loginAsGuest } = useAuth();
+  const { login, loginAsGuest } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [isGuestLoading, setIsGuestLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -32,9 +34,17 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginFormData>();
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log("Login data:", data);
-    // Handle login logic here
+  const onSubmit = async (data: LoginFormData) => {
+    setSubmitError(null);
+    setIsSubmitting(true);
+    try {
+      await login(data.email, data.password);
+      router.push("/profile");
+    } catch (e: any) {
+      setSubmitError(e?.message || "Login failed");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleGuestLogin = async () => {
@@ -201,12 +211,16 @@ const Login = () => {
                 </button>
               </div>
 
-              {/* Continue Button */}
+              {submitError && (
+                <p className="text-red-400 text-sm -mt-2">{submitError}</p>
+              )}
+
               <Button
                 type="submit"
-                className="w-full bg-cyan-400 hover:bg-cyan-500 text-white font-bold py-3 text-lg rounded-lg transition-colors"
+                disabled={isSubmitting}
+                className="w-full bg-cyan-400 hover:bg-cyan-500 text-white font-bold py-3 text-lg rounded-lg transition-colors disabled:opacity-50"
               >
-                CONTINUE
+                {isSubmitting ? "SIGNING IN..." : "CONTINUE"}
               </Button>
             </form>
 

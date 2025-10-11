@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
-import { Button } from "../ui/button";
 
 export const AuthPanel = () => {
   const { isAuthenticated, isGuest, isLoading } = useAuth();

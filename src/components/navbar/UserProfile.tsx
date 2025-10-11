@@ -1,19 +1,17 @@
-import React from "react";
-import Image from "next/image";
+import { useAuth } from "@/contexts/AuthContext";
+import { LogOut } from "lucide-react";
 import Link from "next/link";
-import { Loader, LogOut } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Avatar, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { useAuth } from "@/contexts/AuthContext";
-import { useRouter } from "next/navigation";
 
 interface UserProfileProps {
   name: string;
@@ -27,7 +25,6 @@ const UserProfile = (props: UserProfileProps) => {
     name,
     avatar = "/img/user-example.jpg",
     className = "",
-    href,
   } = props;
   const router = useRouter();
 

@@ -91,10 +91,10 @@ const Weapons = () => {
           {data.items.map((item: StoreItem) => (
             <Card
               key={item.id}
-              className="group bg-orange-24 hover:shadow-lg transition-shadow text-white font-bold border-2 border-transparent hover:bg-transparent hover:border-secondary duration-300 cursor-pointer flex flex-col"
+              className="py-2 group bg-orange-24 hover:shadow-lg transition-shadow text-white font-bold border-2 border-transparent hover:bg-transparent hover:border-secondary duration-300 cursor-pointer flex flex-col"
               onClick={() => handleOpenDialog(item)}
             >
-              <CardHeader>
+              <CardHeader className="px-2">
                 <div className="bg-card-bg rounded-lg flex justify-center py-5">
                   <Image
                     src={"/img/gun.svg"}
@@ -104,13 +104,13 @@ const Weapons = () => {
                     className="object-contain"
                   />
                 </div>
-                <CardTitle className="text-2xl">{item.name}</CardTitle>
-                <CardDescription className="text-lg text-white font-light">
+                <CardTitle className="text-xl">{item.name}</CardTitle>
+                <CardDescription className="text-xs text-white font-light">
                   {item.description}
                 </CardDescription>
               </CardHeader>
 
-              <CardFooter className="mt-auto gap-8 justify-between">
+              <CardFooter className="mt-auto gap-8 justify-between px-2">
                 <p className="text-2xl font-bold">${item.price || 0}</p>
                 <Button
                   className="

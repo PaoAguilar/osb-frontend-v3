@@ -51,7 +51,7 @@ export default function WeaponPreview({
           </div>
 
           <div className="flex justify-between items-center">
-            <p className="text-2xl font-mono">{weapon.price}</p>
+            <p className="text-2xl font-mono">{`$ ${weapon.price}`}</p>
             <Button className="bg-secondary hover:bg-secondary-500 text-black rounded-full px-6 py-2">
               Buy Item
             </Button>

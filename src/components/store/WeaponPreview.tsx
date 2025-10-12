@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { StoreItem } from "@/types/store-items";
 import { Minus, Plus } from "lucide-react";
+import { useState } from "react";
+import DialogSuccessfull from "./DialogSuccessfull";
+import { useRouter } from "next/navigation";
 
 interface WeaponPreviewProps {
   open: boolean;
@@ -23,6 +26,13 @@ export default function WeaponPreview({
   onIncrease,
   onDecrease,
 }: WeaponPreviewProps) {
+  const router = useRouter();
+
+  const [openSuccessModal, setOpenSuccessModal] = useState(false);
+  const handleOpenSuccessModal = () => {
+    setOpenSuccessModal(true);
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTitle></DialogTitle>
@@ -75,9 +85,20 @@ export default function WeaponPreview({
               </button>
             </div>
           </div>
-          <Button className="w-full bg-secondary hover:bg-secondary-500 text-black rounded-full px-6 py-2">
+          <Button
+            onClick={handleOpenSuccessModal}
+            className="w-full bg-secondary hover:bg-secondary-500 text-black rounded-full px-6 py-2"
+          >
             Buy Item
           </Button>
+          <DialogSuccessfull
+            open={openSuccessModal}
+            onOpenChange={(isOpen) => {
+              setOpenSuccessModal(isOpen);
+              if (!isOpen) onOpenChange(false);
+            }}
+            onGoInventory={() => router.push("/inventory")}
+          />
         </div>
       </DialogContent>
     </Dialog>

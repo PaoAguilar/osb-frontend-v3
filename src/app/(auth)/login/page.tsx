@@ -82,7 +82,8 @@ const Login = () => {
               alt="Outer Sports Ballers"
               width={200}
               height={80}
-              className="h-20 w-auto mb-6"
+              className="h-20 w-auto mb-6 cursor-pointer"
+              onClick={() => router.push("/")}
             />
           </div>
 

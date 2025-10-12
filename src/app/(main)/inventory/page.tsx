@@ -127,13 +127,7 @@ const Inventory = () => {
         {data?.items.map((inventory: MyInventory) => (
           <InventoryCard
             key={inventory.id}
-            inventory={{
-              id: inventory.id,
-              name: inventory.item.name,
-              src:"/img/gun.svg",
-              level: inventory.item.upgradeAttributes?.currentLevel?.toString() || "1",
-              locked: false, // You can add logic here based on item properties
-            }}
+            inventory={inventory}
             onClick={handleInventoryDetail}
             isSelected={selectedInventory?.id === inventory.id}
           />

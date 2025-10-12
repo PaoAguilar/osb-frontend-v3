@@ -51,7 +51,7 @@ export default function WeaponBanner({
   imageUrl,
   contentImageUrl,
   contentImageAlt = "banner-side-img",
-  buttonText = "Add to Card",
+  buttonText = "BUY ITEM",
   onButtonClick,
   overlayClassName = "bg-black/50",
   showTagline = true,

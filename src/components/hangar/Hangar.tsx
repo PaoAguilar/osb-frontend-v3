@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import PositionCard from "@/components/hangar/PositionCard";
+import { X } from "lucide-react";
 
 const positions = [
   { id: 1, label: "Shooting Guard", img: "/img/positions/shooting-guard.svg" },
@@ -28,11 +29,14 @@ const LEAGUES = [
   "LNB",
 ] as const;
 
-export default function Hangar() {
+interface HangarProps {
+  onClose?: () => void;
+}
+
+export default function Hangar({ onClose }: HangarProps) {
   const [leagueState, setLeagueState] = useState<Record<string, boolean>>(() =>
     Object.fromEntries(LEAGUES.map((l) => [l, false]))
   );
-
   const [selectedPosition, setSelectedPosition] = useState<number | null>(null);
 
   const canStart = useMemo(
@@ -42,14 +46,27 @@ export default function Hangar() {
 
   return (
     <>
-      <Card className="h-full border-primary p-6 bg-orange-24 text-orange-100">
+      <Card className="relative h-full border-primary bg-orange-24 p-6 text-orange-100">
+        {onClose && (
+          <Button
+            type="button"
+            size="icon"
+            variant="ghost"
+            aria-label="Close hangar"
+            onClick={onClose}
+            className="absolute right-3 top-3 h-8 w-8 rounded-full text-white hover:bg-white/10"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        )}
+
         <p className="text-[22px] text-secondary">Deployment base</p>
         <p className="text-card-bg">
           This is your starting point. Your role will determine the course of
           the galaxy.
         </p>
 
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {positions.map((position) => (
             <PositionCard
               key={position.id}
@@ -62,7 +79,7 @@ export default function Hangar() {
           ))}
         </div>
 
-        <Card className="bg-orange-24 mt-6 border-primary">
+        <Card className="mt-6 border-primary bg-orange-24">
           <CardContent className="p-6">
             <p className="text-[22px] text-secondary">Choose your league</p>
             <p className="text-card-bg">
@@ -79,8 +96,7 @@ export default function Hangar() {
                     key={l}
                     htmlFor={id}
                     className={[
-                      "flex items-center gap-3",
-                      "rounded-xl px-2 py-1",
+                      "flex items-center gap-3 rounded-xl px-2 py-1",
                       checked ? "bg-orange-400/10" : "",
                     ].join(" ")}
                   >
@@ -88,16 +104,13 @@ export default function Hangar() {
                       id={id}
                       checked={checked}
                       onCheckedChange={(v) =>
-                        setLeagueState((prev) => ({
-                          ...prev,
-                          [l]: Boolean(v),
-                        }))
+                        setLeagueState((prev) => ({ ...prev, [l]: Boolean(v) }))
                       }
-                      className="h-5 w-5 border-2 border-white/80 bg-transparent data-[state=checked]:border-orange-400 data-[state=checked]:bg-transparent data-[state=checked]:text-orange-400 cursor-pointer"
+                      className="h-5 w-5 cursor-pointer border-2 border-white/80 bg-transparent text-orange-400 data-[state=checked]:border-orange-400 data-[state=checked]:bg-transparent"
                     />
                     <Label
                       htmlFor={id}
-                      className="text-white font-bold tracking-wide"
+                      className="font-bold tracking-wide text-white"
                     >
                       {l}
                     </Label>
@@ -109,13 +122,13 @@ export default function Hangar() {
         </Card>
       </Card>
 
-      <div className="text-right mt-4">
-        <p className="text-card-bg text-[16px] lowercase">
+      <div className="mt-4 text-right">
+        <p className="text-[16px] lowercase text-card-bg">
           Everything is at stake... the boldest will write history.
         </p>
         <Button
           disabled={!canStart}
-          className={`rounded-full mt-2 cursor-pointer ${
+          className={`mt-2 rounded-full cursor-pointer ${
             canStart
               ? "bg-green-600 hover:bg-green-500"
               : "bg-grey-light cursor-not-allowed"

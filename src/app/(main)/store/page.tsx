@@ -68,7 +68,7 @@ const Store = () => {
       </Swiper>
 
       <p className="text-white text-sm normal-case mt-10">
-        Select Your Loadouts
+        Select Item Types
       </p>
       <div className="mt-4 flex justify-between">
         <Select

@@ -7,12 +7,15 @@ import { useMemo, useState } from "react";
 type Stat = { label: string; value: number };
 
 function ProgressBar({ value }: { value: number }) {
+  const clamped = Math.min(Math.max(value, 0), 100);
   return (
-    <div className="h-2.5 w-full rounded-full bg-white/10">
-      <div
-        className="h-2.5 rounded-full bg-cyan-400 transition-[width]"
-        style={{ width: `${Math.min(Math.max(value, 0), 100)}%` }}
-      />
+    <div className="relative w-full">
+      <div className="h-2.5 w-full rounded-full bg-white/10">
+        <div
+          className="h-2.5 rounded-full bg-cyan-400 transition-[width]"
+          style={{ width: `${clamped}%` }}
+        />
+      </div>
     </div>
   );
 }
@@ -24,6 +27,7 @@ export default function HangarPage() {
   const nextLevel = level + 1;
   const xp = 230;
   const xpMax = 600;
+
   const stats: Stat[] = useMemo(
     () => [
       { label: "Energy", value: 100 },
@@ -37,13 +41,15 @@ export default function HangarPage() {
     []
   );
 
-  if (showHangar) return <Hangar />;
+  if (showHangar) {
+    return <Hangar onClose={() => setShowHangar(false)} />;
+  }
 
   return (
-    <div className="relative">
-      <div className="relative mx-auto flex">
-        <div className="w-full max-w-[315px] text-white md:mt-0">
-          <div className="rounded-xl border-1 border-primary-orange bg-orange-24 text-orange-100 p-4">
+    <div className="relative mx-auto max-w-[1240px] px-4 py-8 md:py-12">
+      <div className="relative grid grid-cols-1 gap-6 md:grid-cols-[360px_1fr]">
+        <div className="text-white">
+          <div className="rounded-2xl border border-primary-orange/80 bg-orange-24/95 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_8px_24px_rgba(0,0,0,0.35)]">
             <h2 className="text-[22px] font-extrabold tracking-wider text-cyan-300">
               SHIP CONTROL
             </h2>
@@ -57,9 +63,9 @@ export default function HangarPage() {
                 WEAPON LEVEL
               </p>
 
-              <div className="flex items-center justify-between text-[11px] text-white/70">
+              <div className="mt-1 flex items-center gap-2 text-[11px] text-white/75">
                 <span className="tabular-nums">LVL {level}</span>
-                <span className="text-white/60">›</span>
+                <span className="opacity-60">▸</span>
                 <span className="tabular-nums">LVL {nextLevel}</span>
                 <span className="ml-auto tabular-nums">
                   {xp}/{xpMax} XP
@@ -77,13 +83,14 @@ export default function HangarPage() {
             {/* Stats */}
             <div className="mt-6 space-y-3">
               {stats.map((s) => (
-                <div key={s.label} className="grid grid-cols-[1fr_auto] gap-x-3">
-                  <div className="flex items-center gap-3">
-                    <span className="w-24 shrink-0 text-[13px] font-semibold text-white/90">
-                      {s.label}
-                    </span>
-                    <ProgressBar value={s.value} />
-                  </div>
+                <div
+                  key={s.label}
+                  className="grid grid-cols-[110px_1fr_42px] items-center gap-3"
+                >
+                  <span className="text-[13px] font-semibold text-white/90">
+                    {s.label}
+                  </span>
+                  <ProgressBar value={s.value} />
                   <span className="text-right text-[12px] tabular-nums text-white/70">
                     {s.value}%
                   </span>
@@ -91,15 +98,25 @@ export default function HangarPage() {
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Botón Play grande */}
-          <Button
-            variant="secondary"
-            onClick={() => setShowHangar(true)}
-            className="mt-6 w-full rounded-full py-6 text-base font-semibold tracking-wide shadow-[0_10px_30px_rgba(0,255,255,0.25)]"
-          >
-            Play
-          </Button>
+        <div className="md:col-start-2 md:row-start-1">
+          <div className="md:absolute md:right-0 md:top-0">
+            <div className="w-full max-w-[360px] rounded-2xl border border-primary-orange/80 bg-orange-24/95 p-5 text-right text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_8px_24px_rgba(0,0,0,0.35)] backdrop-blur-sm">
+              <h3 className="text-lg font-extrabold leading-snug tracking-wider">
+                MAKE YOUR CHOICES FOR A
+                <br />
+                NEW ADVENTURE IN SPACE
+              </h3>
+
+              <Button
+                onClick={() => setShowHangar(true)}
+                className="mt-5 w-full rounded-full bg-cyan-300 px-8 py-6 text-sm font-extrabold uppercase tracking-widest text-black shadow-[0_14px_34px_rgba(0,255,255,0.35)] hover:bg-cyan-200"
+              >
+                Play
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,7 +1,10 @@
-import React from "react";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import Image from "next/image";
+import {
+  Card,
+  CardFooter,
+  CardHeader
+} from "@/components/ui/card";
 import { Lock } from "lucide-react";
+import Image from "next/image";
 import { Label } from "../ui/label";
 
 interface Inventory {
@@ -28,7 +31,7 @@ const InventoryCard = ({
 
   return (
     <Card
-      className={`group pt-2 text-white font-bold border-2 transition-colors duration-300 relative
+      className={`group pt-2 pb-2 text-white font-bold border-2 transition-colors duration-300 relative flex flex-col h-full
         ${
           isSelected
             ? "shadow-lg bg-[#10101099] border-secondary"
@@ -51,7 +54,7 @@ const InventoryCard = ({
             height={60}
             className={`object-contain ${locked ? "opacity-40" : ""}`}
           />
-          
+
           {equipped && (
             <div className="absolute top-2 right-2 bg-green-600 text-white text-xs font-semibold rounded-full px-3 py-1 tracking-wide shadow-md">
               EQUIPPED
@@ -64,21 +67,19 @@ const InventoryCard = ({
             </div>
           )}
         </div>
-        <CardContent className="px-2">
-          <div className="flex justify-between pt-10">
-            <p className="text-2xl">{inventory.name}</p>
-          </div>
-          <div className="flex justify-between items-end">
-            <p className="text-secondary">{`lvl ${inventory.level}`}</p>
-            <Label
-              htmlFor="quantity"
-              className="text-white rounded-2xl p-2 text-[10px] bg-orange-dark tracking-widest"
-            >
-              Quantity: 06
-            </Label>
-          </div>
-        </CardContent>
+        <p className="text-2xl">{inventory.name}</p>
       </CardHeader>
+      <CardFooter className="mt-auto gap-4 justify-between">
+        <p className="text-secondary">{`lvl ${inventory.level}`}</p>
+        <div>
+          <Label
+            htmlFor="quantity"
+            className="text-white rounded-2xl p-2 text-[10px] bg-orange-dark tracking-widest"
+          >
+            Quantity: 06
+          </Label>
+        </div>
+      </CardFooter>
     </Card>
   );
 };

@@ -91,7 +91,7 @@ const Weapons = () => {
           {data.items.map((item: StoreItem) => (
             <Card
               key={item.id}
-              className="group bg-orange-24 hover:shadow-lg transition-shadow text-white font-bold border-2 border-transparent hover:bg-transparent hover:border-secondary transition-colors duration-300 cursor-pointer"
+              className="group bg-orange-24 hover:shadow-lg transition-shadow text-white font-bold border-2 border-transparent hover:bg-transparent hover:border-secondary duration-300 cursor-pointer flex flex-col"
               onClick={() => handleOpenDialog(item)}
             >
               <CardHeader>
@@ -110,8 +110,8 @@ const Weapons = () => {
                 </CardDescription>
               </CardHeader>
 
-              <CardFooter className="gap-8 justify-between">
-                <p className="text-2xl font-bold">${item.price}</p>
+              <CardFooter className="mt-auto gap-8 justify-between">
+                <p className="text-2xl font-bold">${item.price || 0}</p>
                 <Button
                   className="
                     bg-black text-white rounded-full w-fit
@@ -120,7 +120,7 @@ const Weapons = () => {
                     transition-colors duration-300
                   "
                 >
-                  ADD TO CARD
+                  BUY ITEM
                 </Button>
               </CardFooter>
             </Card>

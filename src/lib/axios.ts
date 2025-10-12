@@ -27,12 +27,12 @@ api.interceptors.response.use(
     const status = error?.response?.status;
 
     if (typeof window !== "undefined" && (status === 401 || status === 403)) {
+      /* eslint-disable @typescript-eslint/no-unused-vars */
       try {
         localStorage.removeItem("access_token");
         document.cookie = "access_token=; Path=/; Max-Age=0; SameSite=Lax";
-      } catch (_) {
-         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      }
+      } catch (_) {}
+      /* eslint-enable @typescript-eslint/no-unused-vars */
 
       window.location.assign("/");
     }

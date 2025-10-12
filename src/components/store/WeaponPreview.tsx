@@ -75,7 +75,7 @@ export default function WeaponPreview({
               </button>
             </div>
           </div>
-          <Button className="bg-secondary hover:bg-secondary-500 text-black rounded-full px-6 py-2">
+          <Button className="w-full bg-secondary hover:bg-secondary-500 text-black rounded-full px-6 py-2">
             Buy Item
           </Button>
         </div>

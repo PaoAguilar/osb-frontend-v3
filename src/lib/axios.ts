@@ -30,7 +30,9 @@ api.interceptors.response.use(
       try {
         localStorage.removeItem("access_token");
         document.cookie = "access_token=; Path=/; Max-Age=0; SameSite=Lax";
-      } catch (_) {}
+      } catch (_) {
+         // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      }
 
       window.location.assign("/");
     }

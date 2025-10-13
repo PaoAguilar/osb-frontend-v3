@@ -9,6 +9,7 @@ import { useState } from "react";
 import DialogSuccessfull from "./DialogSuccessfull";
 import DialogConfirmation from "./DialogConfirmation";
 import { useRouter } from "next/navigation";
+import { useBuyStoreItem } from "@/hooks/store-page/useStoreItems";
 
 interface WeaponPreviewProps {
   open: boolean;
@@ -28,6 +29,7 @@ export default function WeaponPreview({
   onDecrease,
 }: WeaponPreviewProps) {
   const router = useRouter();
+  const { mutate: buyItem, isPending } = useBuyStoreItem();
 
   const [openConfirm, setOpenConfirm] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
@@ -38,6 +40,21 @@ export default function WeaponPreview({
     setOpenConfirm(false);
     setOpenSuccess(false);
     onOpenChange(false);
+  };
+
+  const handleConfirm = () => {
+    buyItem(
+      { itemId: weapon.id, quantity },
+      {
+        onSuccess: () => {
+          setOpenConfirm(false);
+          setOpenSuccess(true);
+        },
+        onError: (err) => {
+          console.error("Buy failed", err);
+        },
+      }
+    );
   };
 
   return (
@@ -107,11 +124,9 @@ export default function WeaponPreview({
         open={openConfirm}
         quantity={quantity}
         onOpenChange={(isOpen) => setOpenConfirm(isOpen)}
-        onConfirm={() => {
-          setOpenConfirm(false);
-          setOpenSuccess(true);
-        }}
+        onConfirm={handleConfirm}
         onCancel={() => setOpenConfirm(false)}
+        isLoading={isPending}
       />
 
       <DialogSuccessfull

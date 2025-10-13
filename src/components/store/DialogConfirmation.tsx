@@ -10,6 +10,7 @@ interface DialogConfirmationProps {
   onConfirm: () => void;
   onCancel?: () => void;
   quantity?: number;
+  isLoading?: boolean;
 }
 
 const DialogConfirmation = ({
@@ -18,6 +19,7 @@ const DialogConfirmation = ({
   onConfirm,
   onCancel,
   quantity = 1,
+  isLoading = false,
 }: DialogConfirmationProps) => {
   const plural = (quantity ?? 0) > 1 ? "s" : "";
 
@@ -53,9 +55,10 @@ const DialogConfirmation = ({
 
             <Button
               onClick={onConfirm}
+              disabled={isLoading}
               className="mt-4 w-full rounded-full bg-black hover:bg-black/70 py-5 text-base font-extrabold uppercase tracking-widest cursor-pointer"
             >
-              Confirm
+              {isLoading ? "Processing..." : "Confirm"}
             </Button>
 
             <Button

@@ -4,23 +4,26 @@ import Image from "next/image";
 import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 import { Button } from "../ui/button";
 
-interface DialogSuccessfullProps {
+interface DialogConfirmationProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onGoInventory?: () => void;
-  onBackToStore?: () => void;
+  onConfirm: () => void;
+  onCancel?: () => void;
   quantity?: number;
 }
 
-const DialogSuccessfull = ({
+const DialogConfirmation = ({
   open,
   onOpenChange,
-  onGoInventory,
-  onBackToStore,
-}: DialogSuccessfullProps) => {
+  onConfirm,
+  onCancel,
+  quantity = 1,
+}: DialogConfirmationProps) => {
+  const plural = (quantity ?? 0) > 1 ? "s" : "";
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogTitle className="sr-only">Purchase successful</DialogTitle>
+      <DialogTitle className="sr-only">Confirm purchase</DialogTitle>
 
       <DialogContent
         className={[
@@ -40,25 +43,30 @@ const DialogSuccessfull = ({
           </div>
 
           <div className="text-center">
-            <p className="text-secondary text-3xl font-bold">You Got It!</p>
             <p className="text-base font-light text-card-bg font-helvetica">
-              Your purchase is complete: your new items are waiting in your
-              inventory.
+              You’re about to buy{" "}
+              <span className="text-secondary font-helvetica">
+                {quantity} Item{plural}
+              </span>
+              . Please make sure everything looks right before continuing.
             </p>
 
             <Button
-              onClick={onGoInventory}
+              onClick={onConfirm}
               className="mt-4 w-full rounded-full bg-black hover:bg-black/70 py-5 text-base font-extrabold uppercase tracking-widest cursor-pointer"
             >
-              View in my inventory
+              Confirm
             </Button>
 
             <Button
-              onClick={onBackToStore}
+              onClick={() => {
+                onCancel?.();
+                onOpenChange(false);
+              }}
               variant="link"
               className="text-white"
             >
-              Back to store
+              Cancel
             </Button>
           </div>
         </div>
@@ -67,4 +75,4 @@ const DialogSuccessfull = ({
   );
 };
 
-export default DialogSuccessfull;
+export default DialogConfirmation;

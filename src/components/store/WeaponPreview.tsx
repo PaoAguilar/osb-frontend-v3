@@ -93,6 +93,7 @@ export default function WeaponPreview({
           </Button>
           <DialogSuccessfull
             open={openSuccessModal}
+            quantity={quantity}
             onOpenChange={(isOpen) => {
               setOpenSuccessModal(isOpen);
               if (!isOpen) onOpenChange(false);

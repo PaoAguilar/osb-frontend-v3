@@ -15,6 +15,17 @@ const apexMk2 = localFont({
   display: "swap",
 });
 
+const helvetica = localFont({
+  src: [
+    {
+      path: "../../../public/fonts/HelveticaNowText-Thin.woff",
+      weight: "300",
+      style: "normal",
+    },
+  ],
+  variable: "--font-helvetica",
+});
+
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 const geistMono = Geist_Mono({
   subsets: ["latin"],
@@ -34,7 +45,7 @@ export default function LoginLayout({
   return (
     <html lang="en">
       <body
-        className={`${apexMk2.variable} ${geist.variable} ${geistMono.variable} font-apex relative`}
+        className={`${apexMk2.variable} ${helvetica.variable} ${geist.variable} ${geistMono.variable} font-apex relative`}
       >
         {children}
       </body>

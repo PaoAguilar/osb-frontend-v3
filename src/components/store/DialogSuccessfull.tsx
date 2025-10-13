@@ -9,12 +9,14 @@ interface DialogSuccessfullProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onGoInventory?: () => void;
+  quantity?: number;
 }
 
 const DialogSuccessfull = ({
   open,
   onOpenChange,
   onGoInventory,
+  quantity,
 }: DialogSuccessfullProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -28,7 +30,7 @@ const DialogSuccessfull = ({
         ].join(" ")}
       >
         <div className="px-8 pb-8 pt-10">
-          <div className="mb-6 flex justify-center">
+          <div className="flex justify-center">
             <Image
               src="/img/ball.svg"
               alt="Basketball icon"
@@ -38,26 +40,26 @@ const DialogSuccessfull = ({
           </div>
 
           <div className="text-center">
-            <p className="text-xl font-extrabold tracking-wide text-white">
-              YOUR PURCHASE WAS
-            </p>
-            <p className="mt-1 text-4xl font-extrabold tracking-widest text-green-500">
-              SUCCESSFUL
-            </p>
-
-            <div className="mt-4 flex justify-center">
-              <CheckCircle2 className="h-16 w-16 text-green-500" />
-            </div>
-
-            <p className="mt-6 text-base font-semibold text-white">
-              YOU CAN SEE YOUR NEW ITEM IN
+            <p className=" text-base font-light text-card-bg font-helvetica">
+              You’re about to buy{" "}
+              <span className="text-secondary font-helvetica">{`${quantity} Item${
+                quantity || 0 > 0 ? "s" : ""
+              }`}</span>{" "}
+              . Please make sure everything looks right before continuing.
             </p>
 
             <Button
               onClick={onGoInventory}
               className="mt-4 w-full rounded-full bg-black hover:bg-black/70 py-5 text-base font-extrabold uppercase tracking-widest cursor-pointer"
             >
-              Inventory
+              Confirm
+            </Button>
+            <Button
+              onClick={() => onOpenChange(false)}
+              variant="link"
+              className="text-white"
+            >
+              Cancel
             </Button>
           </div>
         </div>

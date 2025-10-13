@@ -59,6 +59,7 @@
 
 :root {
   --font-apex: "ApexMk2", sans-serif;
+  --font-helvetica: "Helvetica";
   --font-geist: "Geist", sans-serif;
   --font-geist-mono: "Geist Mono", monospace;
   --radius: 0.625rem;
@@ -147,6 +148,10 @@
 /* Different fonts */
 .font-apex {
   font-family: var(--font-apex);
+}
+
+.font-helvetica {
+  font-family: var(--font-helvetica);
 }
 
 .font-geist {

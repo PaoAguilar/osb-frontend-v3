@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
+import AnimatedBall from "../commons/AnimatedBall";
 import { Button } from "../ui/button";
+import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 
 interface DialogSuccessfullProps {
   open: boolean;
@@ -31,12 +31,7 @@ const DialogSuccessfull = ({
       >
         <div className="px-8 pb-8 pt-10">
           <div className="flex justify-center">
-            <Image
-              src="/img/ball.svg"
-              alt="Basketball icon"
-              width={96}
-              height={96}
-            />
+            <AnimatedBall />
           </div>
 
           <div className="text-center">

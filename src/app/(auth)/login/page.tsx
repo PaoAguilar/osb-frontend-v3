@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
+import Starfield from "@/components/commons/Starfield";
 
 interface LoginFormData {
   email: string;
@@ -98,20 +99,7 @@ const Login = () => {
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12 relative overflow-hidden">
         {/* Background with nebula effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-orange-900 via-red-900 to-orange-800">
-          {/* Star effect */}
-          <div className="absolute inset-0 opacity-30">
-            {[...Array(500)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 2}s`,
-                }}
-              />
-            ))}
-          </div>
+          <Starfield />
         </div>
 
         {/* Login Form Container */}

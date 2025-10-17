@@ -13,6 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent } from "@/components/ui/card";
 import Starfield from "@/components/commons/Starfield";
+import Link from "next/link";
 
 interface LoginFormData {
   email: string;
@@ -114,14 +115,14 @@ const Login = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {/* Email Field */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-orange-200">
+                <Label htmlFor="email" className="font-helvetica text-orange-200">
                   Email
                 </Label>
                 <Input
                   id="email"
                   type="email"
                   placeholder="Your email"
-                  className="bg-orange-800/50 border-orange-600 text-orange-100 placeholder:text-orange-300 focus:border-cyan-400 focus:ring-cyan-400"
+                  className="bg-orange-800/50 font-helvetica border-orange-600 text-orange-100 placeholder:text-orange-300 focus:border-cyan-400 focus:ring-cyan-400"
                   {...register("email", {
                     required: "Email is required",
                     pattern: {
@@ -131,13 +132,13 @@ const Login = () => {
                   })}
                 />
                 {errors.email && (
-                  <p className="text-red-400 text-sm">{errors.email.message}</p>
+                  <p className="text-red-400 font-helvetica text-sm">{errors.email.message}</p>
                 )}
               </div>
 
               {/* Password Field */}
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-orange-200">
+                <Label htmlFor="password" className="text-orange-200 font-helvetica">
                   Password
                 </Label>
                 <div className="relative">
@@ -146,7 +147,7 @@ const Login = () => {
                     id="password"
                     type={showPassword ? "text" : "password"}
                     placeholder="Your password"
-                    className="bg-orange-800/50 border-orange-600 text-orange-100 placeholder:text-orange-300 focus:border-cyan-400 focus:ring-cyan-400 pl-10 pr-10"
+                    className="bg-orange-800/50 font-helvetica border-orange-600 text-orange-100 placeholder:text-orange-300 focus:border-cyan-400 focus:ring-cyan-400 pl-10 pr-10"
                     {...register("password", {
                       required: "Password is required",
                       minLength: {
@@ -168,7 +169,7 @@ const Login = () => {
                   </button>
                 </div>
                 {errors.password && (
-                  <p className="text-red-400 text-sm">
+                  <p className="text-red-400 text-sm font-helvetica">
                     {errors.password.message}
                   </p>
                 )}
@@ -187,21 +188,21 @@ const Login = () => {
                   />
                   <Label
                     htmlFor="rememberMe"
-                    className="text-orange-200 text-sm"
+                    className="text-orange-200 text-sm font-helvetica"
                   >
                     Remember Me
                   </Label>
                 </div>
                 <button
                   type="button"
-                  className="text-orange-400 hover:text-orange-300 text-sm font-medium"
+                  className="text-orange-400 font-helvetica hover:text-orange-300 text-sm font-medium"
                 >
                   Forgot Password?
                 </button>
               </div>
 
               {submitError && (
-                <p className="text-red-400 text-sm -mt-2">{submitError}</p>
+                <p className="text-red-400 text-sm -mt-2 font-helvetica">{submitError}</p>
               )}
 
               <Button
@@ -232,7 +233,7 @@ const Login = () => {
             <div className="my-6">
               <Separator className="bg-orange-600" />
               <div className="text-center -mt-3">
-                <span className="bg-orange-900/80 px-4 text-orange-300 text-sm">
+                <span className="bg-orange-900/80 font-helvetica px-4 text-orange-300 text-sm">
                   or continue with
                 </span>
               </div>
@@ -255,15 +256,16 @@ const Login = () => {
 
             {/* Sign Up Link */}
             <div className="text-center mt-6">
-              <span className="text-orange-300 text-sm">
+              <span className="text-orange-300 text-sm font-helvetica">
                 Don&apos;t have an account?{" "}
               </span>
-              <button
+              <Link
+                href="/signup"
                 type="button"
-                className="text-green-400 hover:text-green-300 font-medium text-sm"
+                className="text-green-400 font-helvetica hover:text-green-300 font-medium text-sm"
               >
                 Sign Up
-              </button>
+              </Link>
             </div>
           </CardContent>
         </Card>

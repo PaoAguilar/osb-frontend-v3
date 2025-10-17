@@ -18,6 +18,12 @@ interface AuthContextType {
   loginAsGuest: () => Promise<void>;
   logout: () => Promise<void>;
   checkAuthStatus: () => Promise<void>;
+  registerUser: (
+    username: string,
+    email: string,
+    password: string,
+    options?: { autoLogin?: boolean }
+  ) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -148,6 +154,41 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const registerUser = async (
+    username: string,
+    email: string,
+    password: string,
+    options?: { autoLogin?: boolean }
+  ) => {
+    try {
+      const resp = await fetch(`${API}/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      if (!resp.ok) {
+        let message = "Registration failed";
+        try {
+          const errData = await resp.json();
+          message =
+            errData?.message ||
+            errData?.error ||
+            errData?.errors?.[0]?.message ||
+            message;
+        } catch {}
+        throw new Error(message);
+      }
+
+      if (options?.autoLogin) {
+        await login(email, password);
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const logout = async () => {
     localStorage.removeItem("access_token");
     document.cookie = "access_token=; Path=/; Max-Age=0; SameSite=Lax";
@@ -175,6 +216,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     loginAsGuest,
     logout,
     checkAuthStatus,
+    registerUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -99,7 +99,7 @@ const Inventory = () => {
       <p className="text-secondary text-5xl font-bold mt-14 mb-6">
         My inventory
       </p>
-      <p className="text-white text-sm normal-case mt-10">Select Item Types</p>
+      <p className="font-helvetica text-white text-sm normal-case mt-10">Select Item Types</p>
       <div className="mt-4 flex justify-between">
         <Select
           value={selectedType}

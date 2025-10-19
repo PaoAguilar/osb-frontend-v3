@@ -8,6 +8,7 @@ import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import DialogSuccessfull from "./DialogSuccessfull";
 import DialogConfirmation from "./DialogConfirmation";
+import DialogError from "./DialogError";
 import { useRouter } from "next/navigation";
 import { useBuyStoreItem } from "@/hooks/store-page/useStoreItems";
 
@@ -33,12 +34,14 @@ export default function WeaponPreview({
 
   const [openConfirm, setOpenConfirm] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
+  const [openError, setOpenError] = useState(false);
 
   const openConfirmation = () => setOpenConfirm(true);
 
   const closeAll = () => {
     setOpenConfirm(false);
     setOpenSuccess(false);
+    setOpenError(false);
     onOpenChange(false);
   };
 
@@ -52,6 +55,8 @@ export default function WeaponPreview({
         },
         onError: (err) => {
           console.error("Buy failed", err);
+          setOpenConfirm(false);
+          setOpenError(true);
         },
       }
     );
@@ -120,6 +125,7 @@ export default function WeaponPreview({
         </DialogContent>
       </Dialog>
 
+      {/* CONFIRMATION */}
       <DialogConfirmation
         open={openConfirm}
         quantity={quantity}
@@ -129,6 +135,7 @@ export default function WeaponPreview({
         isLoading={isPending}
       />
 
+      {/* SUCCESS */}
       <DialogSuccessfull
         open={openSuccess}
         quantity={quantity}
@@ -140,9 +147,21 @@ export default function WeaponPreview({
           closeAll();
           router.push("/inventory");
         }}
-        onBackToStore={() => {
-          closeAll();
+        onBackToStore={closeAll}
+      />
+
+      {/* ERROR */}
+      <DialogError
+        open={openError}
+        onOpenChange={(isOpen) => {
+          setOpenError(isOpen);
+          if (!isOpen) closeAll();
         }}
+        onRetry={() => {
+          setOpenError(false);
+          openConfirmation();
+        }}
+        onBackToStore={closeAll}
       />
     </>
   );

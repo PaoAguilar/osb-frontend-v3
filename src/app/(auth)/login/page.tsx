@@ -41,6 +41,9 @@ const Login = () => {
     setIsSubmitting(true);
     try {
       await login(data.email, data.password);
+      // Small delay to ensure cookie is set before navigation
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      router.refresh(); // Refresh to ensure middleware runs with new cookie
       router.push("/");
     } catch (e: any) {
       setSubmitError(e?.message || "Login failed");
@@ -53,6 +56,9 @@ const Login = () => {
     setIsGuestLoading(true);
     try {
       await loginAsGuest();
+      // Small delay to ensure session is established before navigation
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      router.refresh(); // Refresh to ensure middleware runs with new session
       router.push("/");
     } catch (error) {
       console.error("Error creating guest session:", error);
@@ -115,7 +121,10 @@ const Login = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {/* Email Field */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="font-helvetica text-orange-200">
+                <Label
+                  htmlFor="email"
+                  className="font-helvetica text-orange-200"
+                >
                   Email
                 </Label>
                 <Input
@@ -132,13 +141,18 @@ const Login = () => {
                   })}
                 />
                 {errors.email && (
-                  <p className="text-red-400 font-helvetica text-sm">{errors.email.message}</p>
+                  <p className="text-red-400 font-helvetica text-sm">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
 
               {/* Password Field */}
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-orange-200 font-helvetica">
+                <Label
+                  htmlFor="password"
+                  className="text-orange-200 font-helvetica"
+                >
                   Password
                 </Label>
                 <div className="relative">
@@ -202,7 +216,9 @@ const Login = () => {
               </div>
 
               {submitError && (
-                <p className="text-red-400 text-sm -mt-2 font-helvetica">{submitError}</p>
+                <p className="text-red-400 text-sm -mt-2 font-helvetica">
+                  {submitError}
+                </p>
               )}
 
               <Button

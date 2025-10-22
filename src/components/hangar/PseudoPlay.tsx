@@ -1,7 +1,12 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useEffect } from "react";
+import { X } from "lucide-react";
 
-export const PseudoPlay = () => {
+interface PseudoPlayProps {
+  onClose?: () => void;
+}
+
+export const PseudoPlay = ({ onClose }: PseudoPlayProps) => {
   const { user, isGuest } = useAuth();
   const [showLines, setShowLines] = useState({
     command: false,
@@ -35,15 +40,26 @@ export const PseudoPlay = () => {
   }, []);
   return (
     <div className="w-full bg-black border border-gray-600 rounded-lg p-4 font-mono text-green-400 shadow-lg">
-      <div className="flex items-center mb-2">
-        <div className="flex space-x-2">
-          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center">
+          <div className="flex space-x-2">
+            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+          </div>
+          <span className="ml-4 text-gray-400 text-sm">
+            Terminal - PseudoPlay
+          </span>
         </div>
-        <span className="ml-4 text-gray-400 text-sm">
-          Terminal - PseudoPlay
-        </span>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-white transition-colors duration-200 p-1 rounded hover:bg-gray-700"
+            aria-label="Close terminal"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        )}
       </div>
       <div className="text-sm">
         {showLines.command && (

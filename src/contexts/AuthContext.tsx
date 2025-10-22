@@ -138,7 +138,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const data = await resp.json();
       if (data?.access_token) {
         localStorage.setItem("access_token", data.access_token);
-        document.cookie = `access_token=${data.access_token}; Path=/; Max-Age=${60 * 60 * 24}; SameSite=Lax`
+        // Set cookie with more explicit settings to ensure it's properly set
+        document.cookie = `access_token=${data.access_token}; Path=/; Max-Age=${
+          60 * 60 * 24
+        }; SameSite=Lax; Secure=${window.location.protocol === "https:"}`;
       }
 
       if (data?.user) {

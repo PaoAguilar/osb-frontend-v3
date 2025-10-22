@@ -48,7 +48,7 @@ export default function Hangar({ onClose }: HangarProps) {
   return (
     <>
       <div className="my-4">
-        <PseudoPlay />
+        <PseudoPlay onClose={onClose} />
       </div>
       <Card className="relative h-full border-primary bg-orange-24 p-6 text-orange-100">
         {onClose && (

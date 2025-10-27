@@ -35,11 +35,11 @@ const UserProfile = (props: UserProfileProps) => {
   return (
     <div className={`${className} flex items-center gap-4`}>
       <div className="flex gap-3 items-center">
-        {!isAuthenticated && !isMobile && (
+        {/* {!isAuthenticated && !isMobile && (
           <Link className="text-secondary" href={"#"}>
             Play as a Guest
           </Link>
-        )}
+        )} */}
         <Link
           href={`${isAuthenticated ? "/profile" : "/login"}`}
           className="block text-sm text-white hover:text-primary hover:underline transition-colors"

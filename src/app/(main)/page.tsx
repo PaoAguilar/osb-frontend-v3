@@ -70,11 +70,11 @@ export default function Home() {
               <p className="text-3xl">PROFILE</p>
             </Button>
           </Link>
-          <Link href="/guest" passHref>
+          {/* <Link href="/guest" passHref>
             <span className="text-cyan-400 text-sm mt-4 hover:underline">
               Play as a guest
             </span>
-          </Link>
+          </Link> */}
         </div>
       ) : (
         <>

@@ -8,11 +8,12 @@ import { navLinks } from "./navLinks";
 const Navbar = () => {
   const { isAuthenticated, isGuest, user } = useAuth();
 
+  console.log("user", user)
   const userHref = isAuthenticated ? "/profile" : "/login";
   const userName = isAuthenticated
     ? isGuest
       ? "Guest"
-      : user?.name || "User"
+      : user?.username || "User"
     : "Login";
 
 

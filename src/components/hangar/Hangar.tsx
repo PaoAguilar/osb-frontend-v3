@@ -16,18 +16,18 @@ const positions = [
   { id: 5, label: "Power Forward", img: "/img/positions/power-forward.svg" },
 ];
 
-const LEAGUES = [
-  "NBA",
-  "NCAA",
-  "NAB",
-  "WBA",
-  "FIBA",
-  "WNBA",
-  "CBA",
-  "EuroLeague",
-  "ABL",
-  "LNB",
-] as const;
+// const LEAGUES = [
+//   "NBA",
+//   "NCAA",
+//   "NAB",
+//   "WBA",
+//   "FIBA",
+//   "WNBA",
+//   "CBA",
+//   "EuroLeague",
+//   "ABL",
+//   "LNB",
+// ] as const;
 
 interface HangarProps {
   onClose?: () => void;

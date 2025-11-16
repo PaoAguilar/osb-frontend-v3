@@ -78,7 +78,7 @@ export const BoxScoreCard = ({
               type="button"
               onClick={() => setActiveIndex(idx)}
               className={[
-                "flex gap-4 items-center justify-center flex-1 px-6 py-4 transition-colors",
+                "flex gap-4 items-center cursor-pointer flex-1 px-6 py-4 transition-colors",
                 isActive
                   ? "bg-[#983012] text-slate-100"
                   : "bg-black/40 text-slate-300 hover:bg-black/60",

@@ -47,19 +47,20 @@ export default function HangarPage() {
   );
 
   const handlePlay = () => {
-    const username = user?.username;
+    // const username = user?.username;
 
-    if (!username) {
-      return;
-    }
-    mutate(
-      { username },
-      {
-        onSuccess: () => {
-          setShowHangar(true);
-        },
-      }
-    );
+    // if (!username) {
+    //   return;
+    // }
+    // mutate(
+    //   { username },
+    //   {
+    //     onSuccess: () => {
+    //       setShowHangar(true);
+    //     },
+    //   }
+    // );
+    setShowHangar(true);
   };
 
   if (showHangar) {

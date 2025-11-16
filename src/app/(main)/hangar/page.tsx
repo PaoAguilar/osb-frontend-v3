@@ -2,6 +2,8 @@
 
 import Hangar from "@/components/hangar/Hangar";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
+import { useSpin } from "@/hooks/hangar/useSpin";
 import { useMemo, useState } from "react";
 
 type Stat = { label: string; value: number };
@@ -21,7 +23,10 @@ function ProgressBar({ value }: { value: number }) {
 }
 
 export default function HangarPage() {
+  const { user } = useAuth();
   const [showHangar, setShowHangar] = useState(false);
+
+  const { mutate, isPending } = useSpin("generalist");
 
   const level = 5;
   const nextLevel = level + 1;
@@ -40,6 +45,22 @@ export default function HangarPage() {
     ],
     []
   );
+
+  const handlePlay = () => {
+    const username = user?.username;
+
+    if (!username) {
+      return;
+    }
+    mutate(
+      { username },
+      {
+        onSuccess: () => {
+          setShowHangar(true);
+        },
+      }
+    );
+  };
 
   if (showHangar) {
     return <Hangar onClose={() => setShowHangar(false)} />;
@@ -110,10 +131,11 @@ export default function HangarPage() {
               </h3>
 
               <Button
-                onClick={() => setShowHangar(true)}
-                className="mt-5 w-full rounded-full bg-cyan-300 px-8 py-6 text-sm font-extrabold uppercase tracking-widest text-black shadow-[0_14px_34px_rgba(0,255,255,0.35)] hover:bg-cyan-200"
+                onClick={handlePlay}
+                disabled={isPending || !user?.username}
+                className="mt-5 w-full rounded-full bg-cyan-300 px-8 py-6 text-sm font-extrabold uppercase tracking-widest text-black shadow-[0_14px_34px_rgba(0,255,255,0.35)] hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-70"
               >
-                Play
+                {isPending ? "Loading..." : "Play"}
               </Button>
             </div>
           </div>

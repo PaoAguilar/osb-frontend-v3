@@ -6,8 +6,9 @@ import { Card } from "@/components/ui/card";
 import { X } from "lucide-react";
 import { useState } from "react";
 import { BoxScoreCard } from "./BoxScoreCard";
-import { PseudoPlay } from "./PseudoPlay";
+// import { PseudoPlay } from "./PseudoPlay";
 import { sectionsMock01, sectionsMock02 } from "./sectionsMockData";
+import { SocketTest } from "./SocketTest";
 
 const positions = [
   { id: 1, label: "Shooting Guard", img: "/img/positions/shooting-guard.svg" },
@@ -146,7 +147,9 @@ export default function Hangar({ onClose }: HangarProps) {
       {showBoxCard && (
         <>
           <div className="mt-14">
-            <PseudoPlay onClose={onClose} />
+            <SocketTest />
+
+            {/* <PseudoPlay onClose={onClose} /> */}
           </div>
           <div className="my-4 mt-14 w-full overflow-x-auto custom-scroll-thin">
             <BoxScoreCard

@@ -36,7 +36,7 @@ export type Section = {
   players: PlayerRow[];
 };
 
-type TeamBoxScore = {
+export type TeamBoxScore = {
   teamName: string;
   sections: Section[];
 };
@@ -157,23 +157,6 @@ export const BoxScoreCard = ({
               </div>
             </div>
           ))}
-
-          {/* Team */}
-          <div className="mt-4 border-t border-white/10 pt-3">
-            <div
-              className="grid items-center text-[11px] tabular-nums text-slate-100/90"
-              style={{ gridTemplateColumns: GRID_TEMPLATE }}
-            >
-              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-orange-200">
-                Team
-              </span>
-              {STAT_COLUMNS.map((col) => (
-                <span key={col} className="text-center">
-                  00
-                </span>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </section>

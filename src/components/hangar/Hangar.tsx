@@ -5,9 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { X } from "lucide-react";
 import { useState } from "react";
-import { BoxScoreCard } from "./BoxScoreCard";
 // import { PseudoPlay } from "./PseudoPlay";
-import { sectionsMock01, sectionsMock02 } from "./sectionsMockData";
+import { SocketScoreBoard } from "./SocketScoreBoard";
 import { SocketTest } from "./SocketTest";
 
 const positions = [
@@ -151,12 +150,7 @@ export default function Hangar({ onClose }: HangarProps) {
             {/* <PseudoPlay onClose={onClose} /> */}
           </div>
           <div className="my-4 mt-14 w-full overflow-x-auto custom-scroll-thin">
-            <BoxScoreCard
-              teams={[
-                { teamName: "Miami Heat", sections: sectionsMock01 },
-                { teamName: "Orlando Magic", sections: sectionsMock02 },
-              ]}
-            />
+            <SocketScoreBoard />
           </div>
         </>
       )}

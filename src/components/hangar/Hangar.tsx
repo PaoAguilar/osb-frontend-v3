@@ -144,11 +144,9 @@ export default function Hangar({ onClose }: HangarProps) {
 
       {showBoxCard && (
         <>
-          <div className="mt-14">
+          {/* <div className="mt-14">
             <SocketTest />
-
-            {/* <PseudoPlay onClose={onClose} /> */}
-          </div>
+          </div> */}
           <div className="my-4 mt-14 w-full overflow-x-auto custom-scroll-thin">
             <SocketScoreBoard />
           </div>

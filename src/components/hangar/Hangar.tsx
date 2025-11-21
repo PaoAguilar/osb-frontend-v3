@@ -7,7 +7,6 @@ import { X } from "lucide-react";
 import { useState } from "react";
 // import { PseudoPlay } from "./PseudoPlay";
 import { SocketScoreBoard } from "./SocketScoreBoard";
-import { SocketTest } from "./SocketTest";
 
 const positions = [
   { id: 1, label: "Shooting Guard", img: "/img/positions/shooting-guard.svg" },

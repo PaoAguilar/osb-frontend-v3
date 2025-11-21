@@ -4,11 +4,11 @@ import { io, Socket } from "socket.io-client";
 import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 
-const SOCKET_URL = `${process.env.NEXT_PUBLIC_SOCKET_URL}/nba/playbyplay`;
-const GAME_ID = "401810092";
-const UPDATE_INTERVAL = 10;
-const PSEUDO_REPLAY_INTERVAL = 5;
-const PSEUDO_REPLAY_PLAY_COUNT = 10;
+const SOCKET_URL = "";
+const GAME_ID = "";
+const UPDATE_INTERVAL = 0;
+const PSEUDO_REPLAY_INTERVAL = 0;
+const PSEUDO_REPLAY_PLAY_COUNT = 0;
 
 type ConnectionStatus = "disconnected" | "connecting" | "connected" | "error";
 type SubscriptionStatus = "unsubscribed" | "subscribing" | "subscribed";
